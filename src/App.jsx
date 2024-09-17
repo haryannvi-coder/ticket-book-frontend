@@ -80,15 +80,15 @@ const App = () => {
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-900 bg-gray-100">
-      <div className="w-full flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800">
+      <div className="w-full flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-900">
         <ThemeButton />
       </div>
       <div className="flex flex-col items-center mt-5 mb-5">
-        <h1 className="text-4xl font-bold mb-5 text-gray-900 dark:text-gray-100">Train Seat Reservation</h1>
+        <h1 className="text-6xl font-bold mb-5 text-gray-900 dark:text-gray-100">Train Seat Reservation</h1>
 
-        <div className="flex justify-between w-full max-w-4xl">
+        <div className="flex justify-between w-full max-w-5xl">
           {/* Left 42 seats */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-6">
             {seats.slice(0, 42).map((seat) => (
               <button
                 key={seat.seatNumber}
@@ -101,7 +101,7 @@ const App = () => {
           </div>
 
           {/* Right 35 + 3 seats */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-6">
             {seats.slice(42).map((seat) => (
               <button
                 key={seat.seatNumber}
@@ -119,7 +119,7 @@ const App = () => {
             type="number"
             value={numSeats}
             onChange={(e) => setNumSeats(parseInt(e.target.value))}
-            className="border p-2 rounded dark:bg-gray-700 dark:text-white"
+            className=" border border-slate-600 text-center p-2 rounded outline-none focus:outline-none focus:ring-2 focus:ring-green-500  dark:bg-gray-700 dark:text-white"
             placeholder="Enter number of seats"
           />
           <button 
