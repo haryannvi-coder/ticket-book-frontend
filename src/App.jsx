@@ -12,15 +12,16 @@ const App = () => {
   const [error, setError] = useState('');
 
   // Fetch seats from the server
+  const fetchSeats = async () => {
+    try {
+      const response = await axios.get('https://ticket-book-backend-production.up.railway.app/seats');
+      setSeats(response.data);
+    } catch (error) {
+      console.error('Error fetching seats:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchSeats = async () => {
-      try {
-        const response = await axios.get('https://ticket-book-backend-production.up.railway.app/seats');
-        setSeats(response.data);
-      } catch (error) {
-        console.error('Error fetching seats:', error);
-      }
-    };
     fetchSeats();
   }, []);
 
@@ -56,13 +57,13 @@ const App = () => {
     }
 
     try {
-      const response = await axios.post('https://ticket-book-backend-production.up.railway.app/seats/book', {
+      await axios.post('https://ticket-book-backend-production.up.railway.app/seats/book', {
         seatNumbers: seatsToBook.map(seat => seat.seatNumber),
       });
 
       // Update the status of the seats
       const updatedSeats = seats.map(seat => {
-        if (seatsToBook.includes(seat)) {
+        if (seatsToBook.find(bookedSeat => bookedSeat.seatNumber === seat.seatNumber)) {
           return { ...seat, status: 'booked' };
         }
         return seat;
@@ -149,6 +150,8 @@ const App = () => {
 };
 
 export default App;
+
+
 
 
 
